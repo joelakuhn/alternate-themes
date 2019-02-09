@@ -68,10 +68,8 @@ function set_theme($selected_theme) {
   return $selected_theme;
 }
 
-if (function_exists('get_field')) {
-  add_filter('pre_option_stylesheet', 'AlternateThemes\set_theme');
-  add_filter('pre_option_template', 'AlternateThemes\set_theme');
-}
+add_filter('pre_option_stylesheet', 'AlternateThemes\set_theme');
+add_filter('pre_option_template', 'AlternateThemes\set_theme');
 
 add_action('init', function() {
   if (is_user_logged_in()) {
