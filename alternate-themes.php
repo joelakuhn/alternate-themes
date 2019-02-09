@@ -3,6 +3,7 @@
 Plugin Name: Alternate Themes
 Description: Allows pages to use an alternate theme from the site theme and enables hot swapping preview of themes on the front end.
 Version: 1.0.3
+License: GPL2
 Author: Joel Kuhn
 */
 
