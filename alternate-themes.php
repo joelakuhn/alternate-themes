@@ -16,8 +16,24 @@ function set_up_metabox(){
   }
 }
 
+function is_home_url() {
+  $url = get_option('home', false);
+  if ($url === false) return false;
+
+  $url_pieces = explode('/', substr($url, 8));
+  if (isset($url_pieces[1])) {
+    $path = trim($url_pieces[1], '/');
+  }
+  else {
+    $path = '';
+  }
+  return $path === trim($_SERVER['REQUEST_URI'], '/');
+}
+
 function get_page_id() {
   $page_id = false;
+
+
 
   if (is_admin()) {
     if (preg_match('|post\.php$|', $_SERVER['SCRIPT_NAME'])) {
@@ -34,6 +50,11 @@ function get_page_id() {
   // Preview page
   else if (isset($_GET['preview_id'])) {
     $page_id = $_GET['preview_id'];
+  }
+  // Home page
+  else if (is_home_url()) {
+    $page_id = get_option('page_on_front', false);
+    error_log("front page: " . $page_id);
   }
   // Front-end page
   else {
